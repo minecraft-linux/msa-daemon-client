@@ -11,3 +11,16 @@ simpleipc::client::rpc_call<std::vector<BaseAccountInfo>> ServiceClient::getAcco
                 return ret;
             });
 }
+
+simpleipc::client::rpc_call<std::string> ServiceClient::pickAccount(std::string const& clientId,
+                                                                    const std::string& cobrandId) {
+    nlohmann::json data;
+    if (!clientId.empty())
+        data["client_id"] = clientId;
+    if (!cobrandId.empty())
+        data["cobrandid"] = cobrandId;
+    return simpleipc::client::rpc_call<std::string>(
+            rpc("msa/pick_account", data), [](nlohmann::json const& d) {
+                return d["cid"].get<std::string>();
+            });
+}
