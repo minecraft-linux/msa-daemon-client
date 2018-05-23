@@ -9,8 +9,6 @@ std::string ServiceLauncher::getDefaultDataPath() {
 }
 
 std::shared_ptr<ServiceClient> ServiceLauncher::createClient() {
-    std::shared_ptr<ServiceClient> ret (new ServiceClient(open()));
-    ret->send_hello_message();
-    return ret;
+    return std::make_shared<ServiceClient>(open());
 
 }
