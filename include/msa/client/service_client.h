@@ -2,17 +2,16 @@
 
 #include <simpleipc/client/service_client.h>
 #include <simpleipc/client/rpc_call.h>
+#include <daemon_utils/launchable_service_client.h>
 #include "account.h"
 
 namespace msa {
 namespace client {
 
-class ServiceClient : public simpleipc::client::service_client {
+class ServiceClient : public daemon_utils::launchable_service_client {
 
 public:
-    ServiceClient(const std::string& path) : service_client(path) {}
-
-    ServiceClient(std::unique_ptr<simpleipc::client::service_client_impl> impl) : service_client(std::move(impl)) {}
+    explicit ServiceClient(daemon_utils::daemon_launcher& launcher) : launchable_service_client(launcher) {}
 
 
     /**
