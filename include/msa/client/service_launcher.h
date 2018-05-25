@@ -23,7 +23,7 @@ public:
             daemon_launcher(data_path + "/service"), data_path(data_path), executable_path(executable_path) {}
 
     std::vector<std::string> get_arguments() override {
-        return {executable_path, "-d", data_path};
+        return {executable_path, "-d", data_path, "-x"};
     }
 
 };
