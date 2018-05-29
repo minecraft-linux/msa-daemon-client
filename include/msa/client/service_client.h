@@ -11,6 +11,7 @@ namespace client {
 class ServiceClient : public daemon_utils::launchable_service_client {
 
 public:
+    explicit ServiceClient(std::string const& path) : launchable_service_client(path) {}
     explicit ServiceClient(daemon_utils::daemon_launcher& launcher) : launchable_service_client(launcher) {}
 
 
