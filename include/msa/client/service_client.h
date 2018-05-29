@@ -23,6 +23,21 @@ public:
     simpleipc::client::rpc_call<std::vector<BaseAccountInfo>> getAccounts();
 
     /**
+     * Remove an account with the specified CID.
+     * @param cid the account id (CID) of the account to remove
+     * @return a void rpc_call
+     */
+    simpleipc::client::rpc_call<void> addAccount(std::string const& cid, std::string const& username,
+                                                 std::string const& token);
+
+    /**
+     * Remove an account with the specified CID.
+     * @param cid the account id (CID) of the account to remove
+     * @return a void rpc_call
+     */
+    simpleipc::client::rpc_call<void> removeAccount(std::string const& cid);
+
+    /**
      * Opens an UI that lets the user select an account.
      * @param clientId application's client id
      * @param cobrandId brand id (used for the login page style, optional)

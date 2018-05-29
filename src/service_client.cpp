@@ -12,6 +12,21 @@ simpleipc::client::rpc_call<std::vector<BaseAccountInfo>> ServiceClient::getAcco
             });
 }
 
+simpleipc::client::rpc_call<void> ServiceClient::addAccount(std::string const& cid, std::string const& username,
+                                                            std::string const& token) {
+    nlohmann::json data;
+    data["cid"] = cid;
+    data["username"] = username;
+    data["token"] = token;
+    return simpleipc::client::rpc_call<void>(rpc("msa/add_account", data));
+}
+
+simpleipc::client::rpc_call<void> ServiceClient::removeAccount(std::string const& cid) {
+    nlohmann::json data;
+    data["cid"] = cid;
+    return simpleipc::client::rpc_call<void>(rpc("msa/remove_account", data));
+}
+
 simpleipc::client::rpc_call<std::string> ServiceClient::pickAccount(std::string const& clientId,
                                                                     const std::string& cobrandId) {
     nlohmann::json data;
