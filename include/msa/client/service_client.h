@@ -4,6 +4,7 @@
 #include <simpleipc/client/rpc_call.h>
 #include <daemon_utils/launchable_service_client.h>
 #include "account.h"
+#include "token.h"
 
 namespace msa {
 namespace client {
@@ -46,6 +47,17 @@ public:
      */
     simpleipc::client::rpc_call<std::string> pickAccount(std::string const& clientId,
                                                          std::string const& cobrandId = std::string());
+
+    /**
+     * Opens an UI that lets the user select an account.
+     * @param cid the account id (CID) of the account to remove
+     * @param scope the scope to request the token for
+     * @param clientId application's client id
+     * @param silent if true, the request will not open an UI
+     * @return a rpc_call that contains the token
+     */
+    simpleipc::client::rpc_call<std::shared_ptr<Token>> requestToken(std::string const& cid, SecurityScope const& scope,
+                                                                     std::string const& clientId, bool silent = false);
 
 };
 

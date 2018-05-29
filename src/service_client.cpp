@@ -39,3 +39,20 @@ simpleipc::client::rpc_call<std::string> ServiceClient::pickAccount(std::string 
                 return d["cid"].get<std::string>();
             });
 }
+
+simpleipc::client::rpc_call<std::shared_ptr<Token>> ServiceClient::requestToken(
+        std::string const& cid, SecurityScope const& scope, std::string const& clientId, bool silent) {
+    nlohmann::json data;
+    data["cid"] = cid;
+    data["scope"]["address"] = scope.address;
+    data["scope"]["policy_ref"] = scope.policyRef;
+    if (!clientId.empty())
+        data["client_id"] = clientId;
+    if (silent)
+        data["silent"] = true;
+
+    return simpleipc::client::rpc_call<std::shared_ptr<Token>>(
+            rpc("msa/request_token", data), [](nlohmann::json const& d) {
+                return Token::fromJson(d);
+            });
+}
