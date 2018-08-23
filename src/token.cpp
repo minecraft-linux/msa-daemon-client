@@ -5,8 +5,8 @@
 using namespace msa::client;
 
 Token::Token(nlohmann::json const& data) {
-    auto scopeData = data.value("scope", {});
-    securityScope = {data.value("address", ""), data.value("policy_ref", "")};
+    auto scopeData = data.value("scope", nlohmann::json());
+    securityScope = {scopeData.value("address", ""), scopeData.value("policy_ref", "")};
     createTime = std::chrono::time_point<std::chrono::system_clock>(
             std::chrono::milliseconds(data.value("created", 0LL)));
     expireTime = std::chrono::time_point<std::chrono::system_clock>(
