@@ -26,11 +26,12 @@ public:
 
     /**
      * Remove an account with the specified CID.
-     * @param cid the account id (CID) of the account to remove
+     * @param cid the account id (CID) of the account to add
+     * @param puid the passport id of the account
      * @return a void rpc_call
      */
-    simpleipc::client::rpc_call<void> addAccount(std::string const& cid, std::string const& username,
-                                                 std::string const& token);
+    simpleipc::client::rpc_call<void> addAccount(std::string const& cid, std::string const& puid,
+            std::string const& username, std::string const& token);
 
     /**
      * Remove an account with the specified CID.

@@ -12,10 +12,11 @@ simpleipc::client::rpc_call<std::vector<BaseAccountInfo>> ServiceClient::getAcco
             });
 }
 
-simpleipc::client::rpc_call<void> ServiceClient::addAccount(std::string const& cid, std::string const& username,
-                                                            std::string const& token) {
+simpleipc::client::rpc_call<void> ServiceClient::addAccount(std::string const& cid, std::string const& puid,
+        std::string const& username, std::string const& token) {
     nlohmann::json data;
     data["cid"] = cid;
+    data["puid"] = puid;
     data["username"] = username;
     data["token"] = token;
     return simpleipc::client::rpc_call<void>(rpc("msa/add_account", data));
