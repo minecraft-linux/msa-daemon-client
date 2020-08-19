@@ -57,3 +57,14 @@ simpleipc::client::rpc_call<std::shared_ptr<Token>> ServiceClient::requestToken(
                 return Token::fromJson(d);
             });
 }
+
+simpleipc::client::rpc_call<std::string> ServiceClient::openWebbrowser(std::string const& url,
+        std::string const& endurl) {
+    nlohmann::json data;
+    data["url"] = url;
+    data["endurl"] = endurl;
+    return simpleipc::client::rpc_call<std::string>(
+            rpc("msa/open_browser", data), [](nlohmann::json const& d) -> std::string {
+                return d["endurl"];
+            });
+}

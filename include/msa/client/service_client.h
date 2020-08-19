@@ -60,6 +60,7 @@ public:
     simpleipc::client::rpc_call<std::shared_ptr<Token>> requestToken(std::string const& cid, SecurityScope const& scope,
                                                                      std::string const& clientId, bool silent = false);
 
+    simpleipc::client::rpc_call<std::string> openWebbrowser(std::string const& url, std::string const& endurl);
 };
 
 }
